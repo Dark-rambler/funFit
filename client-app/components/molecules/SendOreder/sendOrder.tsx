@@ -13,6 +13,7 @@ function SendOrder ({ goToStep, currentStepIndex }: Props) {
   const send = useRef({
     type: '',
     address: ''
+
   })
 
   const { isLoaded } = useJsApiLoader({

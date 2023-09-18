@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import { Button, Accordion, AccordionItem, Image } from '@nextui-org/react'
 import { showSuccessToast } from '@/components/atoms/Toast/toasts'
 import { useRouter } from 'next/router'
+import { useAppDispatch } from '@/components/redux/hooks'
+import { clearCart } from '@/components/redux/features/cartSlice'
 
 type Props = {
   goToStep: (e: number) => void;
@@ -11,7 +13,7 @@ type Props = {
 function PaymentMethod ({ goToStep, currentStepIndex }: Props) {
   const [selectedKeys, setSelectedKeys] = useState(false)
   const router = useRouter()
-
+  const dispatch = useAppDispatch()
   const download = (filename: string, content: any) => {
     try {
       fetch(content)
@@ -36,6 +38,7 @@ function PaymentMethod ({ goToStep, currentStepIndex }: Props) {
 
   const orderRequest = () => {
     showSuccessToast('Pedido realizado exitosamente', 'success')
+    dispatch(clearCart())
     router.push('/')
   }
 
